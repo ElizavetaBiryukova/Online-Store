@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import axios from 'axios';
 import rating from './assets/img/rating.svg'
 import cartWhite from './assets/img/cartWhite.svg'
-import { useParams } from 'react-router-dom';
+import arrow from './assets/img/arrowBack.svg'
+import { Link, useParams } from 'react-router-dom';
 
 export const Product = () => {
     const [product, setProduct] = useState(null)
@@ -17,7 +18,13 @@ export const Product = () => {
     }, [])
 
     return <div>
-        <div>Заглушка. Понадобится чуть позже. Не удаляейте </div>
+
+        <div className="arrowBack">
+            <Link to={"/"}>
+                <img src={arrow} alt="" />
+                Back to Best Seller
+            </Link>
+        </div>
 
         {
             product === null
