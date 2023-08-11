@@ -4,9 +4,11 @@ import rating from './assets/img/rating.svg'
 import cartWhite from './assets/img/cartWhite.svg'
 import arrow from './assets/img/arrowBack.svg'
 import { Link, useParams } from 'react-router-dom';
+import { Reviews } from "./Reviews";
 
 export const Product = () => {
     const [product, setProduct] = useState(null)
+    const [isProductInCart, setIsProductIncart] = useState(false)
 
     let { productId } = useParams();
 
@@ -15,7 +17,12 @@ export const Product = () => {
         promise.then((res) => {
             setProduct(res.data)
         })
-    }, [])
+    }, [productId])
+
+    const addProductToCartHandler = () => {
+        alert('Товар успешно добавлен в корзину')
+        setIsProductIncart(true)
+    }
 
     return <div>
 
@@ -43,12 +50,14 @@ export const Product = () => {
                             <p>{product.category}</p>
                         </div>
                         <p className="description">{product.description}</p>
-                        <button>
+                        <button onClick={addProductToCartHandler}>
                             <img src={cartWhite} alt="" />
-                            Add to cart
+                            {isProductInCart ? 'Go to cart' : 'Add to cart'}
                         </button>
                     </div>
                 </div>
         }
+
+        <Reviews />
     </div>
 }
